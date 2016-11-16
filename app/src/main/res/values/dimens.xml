@@ -2,5 +2,5 @@
 <resources>
     <dimen name="magnitude_left_margin">16dp</dimen>
     <dimen name="location_left_margin">140dp</dimen>
-    <dimen name="date_right_margin">48dp</dimen>
+    <dimen name="date_left_margin">260dp</dimen>
 </resources>

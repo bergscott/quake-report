@@ -27,9 +27,7 @@
         android:id="@+id/earthquake_date"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginRight="@dimen/date_right_margin"
-        android:layout_marginEnd="@dimen/date_right_margin"
+        android:layout_marginLeft="@dimen/date_left_margin"
+        android:layout_marginStart="@dimen/date_left_margin"
         tools:text="Jan 1, 2016" />
 </RelativeLayout>
