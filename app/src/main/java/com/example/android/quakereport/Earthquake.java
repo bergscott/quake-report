@@ -1,3 +1,5 @@
+package com.example.android.quakereport;
+
 import java.util.Date;
 
 /**
@@ -18,7 +20,7 @@ public class Earthquake {
 
 
     /**
-     * Create a new Earthquake object
+     * Create a new com.example.android.quakereport.Earthquake object
      *
      * @param magnitude the magnitude of the earthquake
      * @param location the city nearest to the epicenter of the earthquake
