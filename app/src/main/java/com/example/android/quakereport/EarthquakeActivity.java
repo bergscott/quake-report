@@ -24,6 +24,7 @@ import java.text.DateFormat;
 import java.text.ParsePosition;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Locale;
 
 public class EarthquakeActivity extends AppCompatActivity {
@@ -38,21 +39,7 @@ public class EarthquakeActivity extends AppCompatActivity {
         setContentView(R.layout.earthquake_activity);
 
         // Create a fake list of earthquake locations.
-        ArrayList<Earthquake> earthquakes = new ArrayList<Earthquake>();
-        earthquakes.add(new Earthquake(7.2, "San Francisco",
-                dateFormat.parse("Feb 2, 2016", new ParsePosition(0))));
-        earthquakes.add(new Earthquake(6.1, "London",
-                dateFormat.parse("July 20, 2015", new ParsePosition(0))));
-        earthquakes.add(new Earthquake(3.9, "Tokyo",
-                dateFormat.parse("Nov 10, 2014", new ParsePosition(0))));
-        earthquakes.add(new Earthquake(5.4, "Mexico City",
-                dateFormat.parse("May 3, 2014", new ParsePosition(0))));
-        earthquakes.add(new Earthquake(2.8, "Moscow",
-                dateFormat.parse("Jan 31, 2013", new ParsePosition(0))));
-        earthquakes.add(new Earthquake(4.9, "Rio de Janeiro",
-                dateFormat.parse("Aug 19, 2012", new ParsePosition(0))));
-        earthquakes.add(new Earthquake(1.6, "Paris",
-                dateFormat.parse("Oct 30, 2011", new ParsePosition(0))));
+        ArrayList<Earthquake> earthquakes = QueryUtils.extractEarthquakes();
 
         // Find a reference to the {@link ListView} in the layout
         ListView earthquakeListView = (ListView) findViewById(R.id.list);

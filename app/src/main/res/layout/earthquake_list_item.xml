@@ -11,7 +11,7 @@
         android:id="@+id/earthquake_magnitude"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_weight="7"
+        android:layout_weight="5"
         android:layout_marginLeft="@dimen/magnitude_left_margin"
         android:layout_marginStart="@dimen/magnitude_left_margin"
         tools:text="4.5" />
@@ -20,8 +20,8 @@
         android:id="@+id/earthquake_location"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_weight="7"
-
+        android:layout_weight="9"
+        android:padding="@dimen/location_padding"
         tools:text="Los Angeles" />
 
     <TextView
