@@ -15,13 +15,27 @@
         android:layout_weight="5"
         tools:text="4.5" />
 
-    <TextView
-        android:id="@+id/earthquake_location"
+    <LinearLayout
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="9"
-        android:padding="@dimen/location_padding"
-        tools:text="Los Angeles" />
+        android:orientation="vertical"
+        android:padding="@dimen/location_padding">
+
+        <TextView
+            android:id="@+id/earthquake_location_offset"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="12sp"
+            tools:text="77km SSE of"/>
+
+        <TextView
+            android:id="@+id/earthquake_primary_location"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            tools:text="Los Angeles" />
+    </LinearLayout>
 
     <LinearLayout
         android:layout_width="0dp"
@@ -35,7 +49,6 @@
             android:id="@+id/earthquake_date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textStyle="bold"
             tools:text="Jan 1, 2016" />
 
         <TextView
