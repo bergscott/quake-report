@@ -69,9 +69,12 @@ public final class QueryUtils {
                 // get the time of the earthquake from the properties object
                 long time = properties.getLong("time");
 
+                // get the url of the earthquake from the properties object
+                String url = properties.getString("url");
+
                 // create a new Earthquake object with the extracted properties and add it to the
                 // ArrayList of Earthquakes
-                earthquakes.add(new Earthquake(magnitude, location, time));
+                earthquakes.add(new Earthquake(magnitude, location, time, url));
             }
 
         } catch (JSONException e) {
