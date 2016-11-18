@@ -5,4 +5,5 @@
     <dimen name="location_left_margin">140dp</dimen>
     <dimen name="date_right_margin">8dp</dimen>
     <dimen name="location_padding">8dp</dimen>
+    <dimen name="magnitude_circle_size">36dp</dimen>
 </resources>
