@@ -31,8 +31,6 @@ public class EarthquakeActivity extends AppCompatActivity {
 
     public static final String LOG_TAG = EarthquakeActivity.class.getName();
 
-    private DateFormat dateFormat = new SimpleDateFormat("MMMM d, yyyy", Locale.US);
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

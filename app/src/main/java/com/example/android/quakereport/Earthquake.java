@@ -1,7 +1,5 @@
 package com.example.android.quakereport;
 
-import java.util.Date;
-
 /**
  * Represents an earthquake event
  * Created by bergs on 11/16/2016.
@@ -15,8 +13,8 @@ public class Earthquake {
     /* City nearest epicenter of earthquake */
     private String mLocation;
 
-    /* Date of the earthquake */
-    private Date mDate;
+    /* unix time of the earthquake (in milliseconds)*/
+    private long mTimeInMilliseconds;
 
 
     /**
@@ -24,12 +22,12 @@ public class Earthquake {
      *
      * @param magnitude the magnitude of the earthquake
      * @param location the city nearest to the epicenter of the earthquake
-     * @param date the date of the earthquake
+     * @param time the time of the earthquake in milliseconds since epoch
      */
-    public Earthquake(double magnitude, String location, Date date) {
+    public Earthquake(double magnitude, String location, long time) {
         this.mMagnitude = magnitude;
         this.mLocation = location;
-        this.mDate = date;
+        this.mTimeInMilliseconds = time;
     }
 
     public double getMagnitude() {
@@ -40,7 +38,7 @@ public class Earthquake {
         return mLocation;
     }
 
-    public Date getDate() {
-        return mDate;
+    public long getTimeInMilliseconds() {
+        return mTimeInMilliseconds;
     }
 }

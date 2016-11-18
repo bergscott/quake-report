@@ -11,6 +11,7 @@ import android.widget.TextView;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Locale;
 
 /**
@@ -19,7 +20,11 @@ import java.util.Locale;
 
 public class EarthquakeAdapter extends ArrayAdapter<Earthquake> {
 
-    private DateFormat dateFormat = new SimpleDateFormat("MMM d, yyyy", Locale.US);
+    /* date format for displaying the date of an earthquake */
+    private  final DateFormat DATE_FORMAT = new SimpleDateFormat("MMM d, yyyy", Locale.US);
+
+    /* date format for displaying the time of day of an earthquake */
+    private final DateFormat TIME_FORMAT = new SimpleDateFormat("h:mma", Locale.US);
 
     public EarthquakeAdapter(Context context, ArrayList<Earthquake> earthquakes) {
         super(context, 0, earthquakes);
@@ -50,10 +55,18 @@ public class EarthquakeAdapter extends ArrayAdapter<Earthquake> {
         TextView locationTextView = (TextView) listItemView.findViewById(R.id.earthquake_location);
         locationTextView.setText(currentEarthquake.getLocation());
 
+        // get the time from the current Earthquake and convert it into a new Date object
+        Date earthquakeDate = new Date(currentEarthquake.getTimeInMilliseconds());
+
         // find the text view in the layout for the date and set its text to the current
         // Earthquake's date
         TextView dateTextView = (TextView) listItemView.findViewById(R.id.earthquake_date);
-        dateTextView.setText(dateFormat.format(currentEarthquake.getDate()));
+        dateTextView.setText(DATE_FORMAT.format(earthquakeDate));
+
+        // find the text view in the layout for the time and set its text to the current
+        // Earthquake's time of day
+        TextView timeTextView = (TextView) listItemView.findViewById(R.id.earthquake_time);
+        timeTextView.setText(TIME_FORMAT.format(earthquakeDate));
 
         return listItemView;
     }
