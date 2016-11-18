@@ -9,6 +9,7 @@ import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
 import java.text.DateFormat;
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -21,13 +22,16 @@ import java.util.Locale;
 public class EarthquakeAdapter extends ArrayAdapter<Earthquake> {
 
     /* date format for displaying the date of an earthquake */
-    private  final DateFormat DATE_FORMAT = new SimpleDateFormat("MMM d, yyyy", Locale.US);
+    private final DateFormat DATE_FORMAT = new SimpleDateFormat("MMM d, yyyy", Locale.US);
 
     /* date format for displaying the time of day of an earthquake */
     private final DateFormat TIME_FORMAT = new SimpleDateFormat("h:mma", Locale.US);
 
-    private final String LOCATION_OFFSET_INDICATOR = " of ";
-    private final String NO_OFFSET_REPLACEMENT = "Near the";
+    /*
+    constant value for splitting the location of an Earthquake into its location offset and
+    primary location components
+     */
+    private static final String LOCATION_SEPERATOR = " of ";
 
     public EarthquakeAdapter(Context context, ArrayList<Earthquake> earthquakes) {
         super(context, 0, earthquakes);
@@ -48,10 +52,15 @@ public class EarthquakeAdapter extends ArrayAdapter<Earthquake> {
         // get the current Earthquake from the ArrayList
         Earthquake currentEarthquake = getItem(position);
 
+        // get the magnitude of the current earthquake and convert it to a formatted String
+        double magnitude = currentEarthquake.getMagnitude();
+        DecimalFormat decimalFormatter = new DecimalFormat("0.0");
+        String formattedMagnitude = decimalFormatter.format(magnitude);
+
         // find the text view in the layout for the magnitude and set its text to the current
         // Earthquake's magnitude
         TextView magnitudeTextView = (TextView) listItemView.findViewById(R.id.earthquake_magnitude);
-        magnitudeTextView.setText(String.valueOf(currentEarthquake.getMagnitude()));
+        magnitudeTextView.setText(formattedMagnitude);
 
         // get the location String from the current Earthquake and split it into the location offset
         // and primary location Strings
@@ -61,15 +70,15 @@ public class EarthquakeAdapter extends ArrayAdapter<Earthquake> {
 
         // if the full location contains a location offset split it and extract the offset and
         // primary locations
-        if (fullLocation.contains(LOCATION_OFFSET_INDICATOR)) {
-            String[] splitLocation = fullLocation.split(LOCATION_OFFSET_INDICATOR);
-            locationOffset = getContext().getResources().getString(R.string.location_offset,
+        if (fullLocation.contains(LOCATION_SEPERATOR)) {
+            String[] splitLocation = fullLocation.split(LOCATION_SEPERATOR);
+            locationOffset = getContext().getString(R.string.location_offset,
                     splitLocation[0]);
             primaryLocation = splitLocation[1];
         } else {
             // the full location does not contain an offset, so replace it with "Near the" and use
             // the full location for the primary location
-            locationOffset = NO_OFFSET_REPLACEMENT;
+            locationOffset = getContext().getString(R.string.near_the);
             primaryLocation = fullLocation;
         }
 
