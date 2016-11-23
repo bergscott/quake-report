@@ -165,7 +165,7 @@ public final class QueryUtils {
                     line = reader.readLine();
                 }
             } catch (IOException e) {
-                Log.e(LOG_TAG, "Problem reading the earthquake JSON results.", e);
+                Log.e(LOG_TAG, "Problem reading the http response input stream.", e);
             }
         }
         return output.toString();
