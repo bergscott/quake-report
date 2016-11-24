@@ -3,6 +3,7 @@ package com.example.android.quakereport;
 import android.content.AsyncTaskLoader;
 import android.content.Context;
 import android.text.TextUtils;
+import android.util.Log;
 
 import java.util.List;
 
@@ -13,6 +14,7 @@ import java.util.List;
 
 class EarthquakeLoader extends AsyncTaskLoader<List<Earthquake>> {
 
+    private static final String LOG_TAG = "EarthquakeLoader";
     /** Query url for USGS earthquake api */
     private String mUrl;
 
