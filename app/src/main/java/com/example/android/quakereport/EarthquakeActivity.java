@@ -27,6 +27,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import java.text.DateFormat;
@@ -54,6 +55,7 @@ public class EarthquakeActivity extends AppCompatActivity implements LoaderManag
 
     private EarthquakeAdapter mEarthquakeAdapter;
     private TextView mEmptyStateTextView;
+    private ProgressBar mProgressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -85,6 +87,11 @@ public class EarthquakeActivity extends AppCompatActivity implements LoaderManag
         mEmptyStateTextView = (TextView) findViewById(R.id.empty_state_text_view);
         earthquakeListView.setEmptyView(mEmptyStateTextView);
 
+        // find the progress bar by id for use in onLoadFinished
+        mProgressBar = (ProgressBar) findViewById(R.id.progress_bar);
+
+        // start the loader that will handle updating the earthquake list via a background http
+        // request
         getLoaderManager().initLoader(EARTHQUAKE_LOADER_ID, null, this);
     }
 
@@ -96,14 +103,19 @@ public class EarthquakeActivity extends AppCompatActivity implements LoaderManag
 
     @Override
     public void onLoadFinished(Loader<List<Earthquake>> loader, List<Earthquake> earthquakes) {
+
+        // hide the progress bar since the http request has finished
+        mProgressBar.setVisibility(View.GONE);
+
         if (earthquakes != null && !earthquakes.isEmpty()) {
             // clear previous information from adapter
             mEarthquakeAdapter.clear();
             // add list of earthquakes to adapter
             mEarthquakeAdapter.addAll(earthquakes);
-            // set text to empty state text view (in case of no earthquakes found)
-            mEmptyStateTextView.setText(R.string.empty_state);
         }
+
+        // set text to empty state text view (in case of no earthquakes found)
+        mEmptyStateTextView.setText(R.string.empty_state);
     }
 
     @Override
