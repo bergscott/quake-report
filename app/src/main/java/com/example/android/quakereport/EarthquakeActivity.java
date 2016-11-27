@@ -16,8 +16,11 @@
 package com.example.android.quakereport;
 
 import android.app.LoaderManager;
+import android.content.Context;
 import android.content.Intent;
 import android.content.Loader;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -90,9 +93,19 @@ public class EarthquakeActivity extends AppCompatActivity implements LoaderManag
         // find the progress bar by id for use in onLoadFinished
         mProgressBar = (ProgressBar) findViewById(R.id.progress_bar);
 
+        ConnectivityManager connectivityManager = (ConnectivityManager)
+                getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
+
         // start the loader that will handle updating the earthquake list via a background http
         // request
-        getLoaderManager().initLoader(EARTHQUAKE_LOADER_ID, null, this);
+        if (networkInfo != null && networkInfo.isConnected()) {
+            getLoaderManager().initLoader(EARTHQUAKE_LOADER_ID, null, this);
+        } else {
+            mProgressBar.setVisibility(View.GONE);
+            mEmptyStateTextView.setText(R.string.no_internet_connection);
+        }
+
     }
 
     @Override

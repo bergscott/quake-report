@@ -18,4 +18,5 @@
     <string name="location_offset"><xliff:g id="offset">%s</xliff:g> of</string>
     <string name="near_the">Near the</string>
     <string name="empty_state">No earthquakes found.</string>
+    <string name="no_internet_connection">No internet connection.</string>
 </resources>
