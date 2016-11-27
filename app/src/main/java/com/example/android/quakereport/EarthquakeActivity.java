@@ -27,6 +27,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import java.text.DateFormat;
 import java.text.ParsePosition;
@@ -52,6 +53,7 @@ public class EarthquakeActivity extends AppCompatActivity implements LoaderManag
     private static final int EARTHQUAKE_LOADER_ID = 0;
 
     private EarthquakeAdapter mEarthquakeAdapter;
+    private TextView mEmptyStateTextView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,6 +81,10 @@ public class EarthquakeActivity extends AppCompatActivity implements LoaderManag
             }
         });
 
+        // find the empty state text view and set it as the empty view for the list view
+        mEmptyStateTextView = (TextView) findViewById(R.id.empty_state_text_view);
+        earthquakeListView.setEmptyView(mEmptyStateTextView);
+
         getLoaderManager().initLoader(EARTHQUAKE_LOADER_ID, null, this);
     }
 
@@ -95,6 +101,8 @@ public class EarthquakeActivity extends AppCompatActivity implements LoaderManag
             mEarthquakeAdapter.clear();
             // add list of earthquakes to adapter
             mEarthquakeAdapter.addAll(earthquakes);
+            // set text to empty state text view (in case of no earthquakes found)
+            mEmptyStateTextView.setText(R.string.empty_state);
         }
     }
 
